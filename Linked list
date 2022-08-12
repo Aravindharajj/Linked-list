@@ -1,0 +1,66 @@
+class Element(object):
+    def __init__(self,value):
+        self.value=value
+        self.next=None
+
+class LinkedList(object):
+    def __init__(self,head=None):
+        self.head=head
+
+    def append(self,element):
+        current=self.head
+        if self.head:
+            while current.next:
+                current=current.next
+            current.next=element
+        else:
+            self.head=element
+
+    def position(self,position):
+        pos=1
+        current=self.head
+        while current:
+            if pos==position:
+                return current
+            else:
+                current=current.next
+                pos+=1
+
+    def insert(self,element,position):
+        pos=1
+        current=self.head
+        if position==1:
+            element.next=current.next
+            self.head=element
+        else:
+            while current:
+                if pos==position-1:
+                    element.next=current.next
+                    current.next=element
+                    break
+                else:
+                    current=current.next
+                    pos+=1
+
+    def delete(self,value):
+        current=self.head
+        if current.value==value:
+            self.head=current.next
+
+        else:
+            while current.next:
+                if current.next.value==value:
+                    current.next=current.next.next
+                    break
+                else:
+                    current=current.next
+
+e1 = Element(1)
+e2 = Element(2)
+e3 = Element(3)
+e4 = Element(4)
+ll = LinkedList(e1)
+ll.append(e2)
+ll.append(e3)
+print(ll.head.next.next.value)
+print (ll.position(1).value)
